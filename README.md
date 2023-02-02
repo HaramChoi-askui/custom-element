@@ -34,7 +34,7 @@ await aui
     .customElement({
         customImage: './logo.png', // required
         name: 'myLogo', // optional
-        threshold: 0.9 // optional, defaults to 0.9
+        threshold: 0.9, // optional, defaults to 0.9
         rotationDegreePerStep: 0, // optional, defaults to 0
         imageCompareFormat: 'grayscale', // optional, defaults to 'grayscale'
         mask:{x:0, y:0} // a polygon to match only a certain area of the custom element
