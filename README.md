@@ -6,9 +6,7 @@
 
 **Custom Element Selection** is a feature in askui that enables you to create custom selectors for elements on the screen, instead of relying on the standard selectors provided such as *Button, Icon, etc.*
 
-With this feature, you can define a custom selector based on how the element seems on the screen. This allows for a more precise and robust selection of elements in the UI, which can lead to more reliable test automation.
-
-This can be particularly useful in situations where standard selectors are unreliable due to the non-standard property of the element. It provides greater flexibility and control, allowing you to tailor automation tests to meet the specific needs of your application.
+With this feature, you can define a custom selector based on how the element is displayed on the screen. This can be particularly useful in situations where standard selectors are unreliable due to the non-standard property of the element. It provides greater flexibility and control, allowing you to tailor the automation to meet the specific needs of your application.
 
 Here we will demonstrate how to use a custom element to explore Google Street View.
 
@@ -37,25 +35,46 @@ await aui
         threshold: 0.9, // optional, defaults to 0.9
         rotationDegreePerStep: 0, // optional, defaults to 0
         imageCompareFormat: 'grayscale', // optional, defaults to 'grayscale'
-        mask:{x:0, y:0} // optional, a polygon to match only a certain area of the custom element
+        mask:{x:0, y:0}[] // optional, a polygon to match only a certain area of the custom element
     })
     .exec();
 ```
 
-There are **two things** to keep in mind when using `customElement()`:
+### Arguments
 
-### 1) The resolution of the custom image
+- **customImage** (*`string`, required*):
+    - A cropped image in the form of a base64 string or file path.
+- **name** (*`string`, optional*):
+    - A unique name that can be used for filtering for the custom element. If not given, any text inside the custom image will be detected via OCR.
+- **threshold** (*`number`, optional*):
+    - A threshold for how much a UI element needs to be similar to the custom element as defined. Takes values between `0.0` (== all elements are recognized as the custom element which is probably not what you want) and `1.0` (== elements need to look exactly like defined by `CustomElementJson` which is unlikely to be achieved as even minor differences count). Defaults to `0.9`.
+- **rotationDegreePerStep** (*`number`, optional*):
+    - Step size in rotation degree. Rotates the custom image by this step size until 360° is exceeded. The range is from `0` to `360`. Defaults to `0`.
+- **mask** (*`{x:number,y:number}[]`, optional*):
+    - A polygon defined by an array of points to match only a certain area of the given custom image.
 
-The resolution of the given custom image **must be the same as it is viewed on the screen.** The simplest way to accomplish it might be to screen capture and crop the desired image from your screen directly. In Windows and macOS, you can use the built-in screen capture tool:
+###Two Things to be Aware of When Using `customElement()`
 
-- Windows: Press `windows` + `shift` + `s` (Windows 10 or higher)
-- macOS: Press `cmd` + `shift` + `4`
+**1) Create the Custom Image by Cropping it From The Actual Screen**
 
-In both cases, you will be asked to select a certain portion of the screen. On Windows, the captured image will be stored in the clipboard, so you will need to save it to an image file. On macOS, the image will be saved in the `~/Desktop` by default.
+- To find a matching element from the screen, the custom image **must be the same as it is displayed on the screen.** By saying *same* in this sense, includes the **size, rotation as well as the overlapping object,** if there is any. 
 
-### 2) The time of the execution will increase by a notable amount
+![match-cases](./assets/heart-match.jpg)
 
-To examine whether the custom image matches the given screen, askui iterates through the whole pixels of the given screen as well as the custom image. So it is likely to increase the runtime by a notable amount. Therefore, if the task could be accomplished with other filters such as `icon()`, `button()`, or `text()`, then it's maybe better to avoid using the `customElement()`.
+- Note the **left-bottom case** of the illustration. A rotated element can be also matched, but **only if** everything else except the rotation are staying the same as it is displayed on the screen. If you can assure that your custom image is exactly the same as it is displayed on the screen + if you know the degree of the rotation, then you could consider using the **rotationDegreePerStep** parameter. And because askui will try to rotate the custom element for the whole revolution, a divisor of the rotated degree could be also used, e.g in the illustrated case, we can use not only `90` but also `45`, `30`, `15`, etc. But since smaller degrees will require more iteration steps, it will increase the runtime by a notable amount.
+
+- **The simplest way** to accomplish it might be **to screen capture and crop the desired image from your screen directly.** In Windows and macOS, you can use the built-in screen capture tool:
+
+    - Windows: Press `windows` + `shift` + `s` (Windows 10 or higher)
+    - macOS: Press `cmd` + `shift` + `4`
+
+- In both cases, you will be asked to select a certain portion of the screen. On Windows, the captured image will be stored in the clipboard, so you will need to save it to an image file. On macOS, the image will be saved in the `~/Desktop` by default.
+
+
+
+**2) The Time of the Execution will Increase by a Notable Amount**
+
+- To examine whether the custom image matches the given screen, askui iterates through the whole pixels of the given screen as well as the custom image. So it is likely to increase the runtime by a notable amount. Therefore, if the task could be accomplished with other filters such as `icon()`, `button()`, or `text()`, then it's maybe better to avoid using the `customElement()`.
 
 
 
@@ -80,9 +99,9 @@ project_root/
 ├─ human_figure.png
 ```
 
-## Write the askui Test Code
+## Write the askui Code
 
-- If you are prepared with the image above, let's jump into our test code:
+- If you are prepared with the image above, let's jump into our code:
 
 ```ts
 import { aui } from './helper/jest.setup';
@@ -144,9 +163,9 @@ describe('Explore the world in google maps', ()=>{
 
 - After successfully running the code, you will be able to see the landscape of **Machu Picchu**, the most iconic citadel of the lost empire Inca.
 
-- It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen(your display can have a different resolution than mine). You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`.
+- It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen (your display can have a different resolution than mine). You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`, for example, try with `moveMouseRelativelyTo(-5, -15)`.
 
-## Breaking Down the Test Code
+## Breaking Down the Code
 
 ### 1) Open the Web Browser and Go To the Desired Website
 
@@ -233,8 +252,8 @@ it('enable street view', async ()=>{
 
 ## Conclusion
 
-To construct a robust and reliable test suite, you might want to consider using the custom element feature of askui. But as mentioned above, keep in mind that, as a trade-off, it consumes more time for the test run. Taking it into account, using a custom element to interact with the given UI can be a huge help, especially if the element lacks standard properties such as tag or appearance. 
+To construct a robust and reliable test suite, you might want to consider using the custom element feature of askui. But as mentioned above, keep in mind that, as a trade-off, it consumes more time than other features. Taking it into account, using a custom element to interact with the given UI can be a huge help, especially if the element lacks standard properties such as tag or appearance. 
 
 
-If you got any issues while following this article, don't hesitate to ask for help in our [Discord Community!](https://discord.gg/Gu35zMGxbx) We are more than glad to hear about your test case and help!
+If you got any issues while following this article, don't hesitate to ask for help in our [Discord Community!](https://discord.gg/Gu35zMGxbx) We are more than glad to hear about your experience and help!
 
