@@ -61,16 +61,16 @@ To examine whether the custom image matches the given screen, askui iterates thr
 
 ## Capture the Custom Element
 
-In this demonstration, we will search for a certain area in **Google Street View**. This can be enabled by pressing a button **at the right corner of the [Google Maps](https://maps.google.com)**:
+- In this demonstration, we will search for a certain area in **Google Street View**. This can be enabled by pressing a button **at the right corner of the [Google Maps](https://maps.google.com)**:
 
 ![button](./assets/google-ui.png)
 
-Can you see the yellow tiny human in the corner? We need an image of this human figure to interact with it.
+- Can you see the yellow tiny human in the corner? We need an image of this human figure to interact with it.
 
-Let's make a screen capture of it. It shall look like this:
+- Let's make a screen capture of it. It shall look like this:
 ![human-figure](./assets/human.png)
 
-Then save the image in the root of your project's root directory. The file tree of your project's root directory will be like this:
+- Then save the image in your project's root directory. The file tree of your project's root directory will be like this:
 ```bash
 project_root/
 ├─ node_modules/
@@ -82,7 +82,7 @@ project_root/
 
 ## Write the askui Test Code
 
-If you are prepared with the image above, let's jump into our test code:
+- If you are prepared with the image above, let's jump into our test code:
 
 ```ts
 import { aui } from './helper/jest.setup';
@@ -142,9 +142,9 @@ describe('Explore the world in google maps', ()=>{
 });  
 ```
 
-After successfully running the code, you will be able to see the landscape of **Machu Picchu**, the most iconic citadel of the lost empire Inca.
+- After successfully running the code, you will be able to see the landscape of **Machu Picchu**, the most iconic citadel of the lost empire Inca.
 
-It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen.(you display can have a different resolution than mine) You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`.
+- It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen.(you display can have a different resolution than mine) You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`.
 
 ## Breaking Down the Test Code
 
