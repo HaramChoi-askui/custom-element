@@ -139,7 +139,7 @@ describe('Explore the world in google maps', ()=>{
 
     // now we look for our custom element on the map
     // move the mouse to the custom element
-    const myelt = await aui.moveMouseTo()
+    await aui.moveMouseTo()
         .customElement({
             customImage: "./human-figure.png",
             name: "street-view-icon",
@@ -219,7 +219,7 @@ it('enable street view', async ()=>{
 
     // now we look for our custom element on the map
     // move the mouse to the custom element
-    const myelt = await aui.moveMouseTo()
+    await aui.moveMouseTo()
         .customElement({
             customImage: "./human-figure.png",
             name: "maps",
