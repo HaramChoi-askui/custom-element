@@ -53,7 +53,7 @@ await aui
 - **mask** (*`{x:number,y:number}[]`, optional*):
     - A polygon defined by an array of points to match only a certain area of the given custom image.
 
-###Two Things to be Aware of When Using `customElement()`
+### Two Things to be Aware of When Using `customElement()`
 
 **1) Create the Custom Image by Cropping it From The Actual Screen**
 
