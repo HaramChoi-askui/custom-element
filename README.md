@@ -1,8 +1,5 @@
 # Custom Elements in askui
 
-## Demonstration
-
-https://user-images.githubusercontent.com/115455389/216305289-3527deb3-0f04-49c1-b84f-e68f04b57755.mp4
 
 
 ## Overview
@@ -15,6 +12,9 @@ This can be particularly useful in situations where standard selectors are unrel
 
 Here we will demonstrate how to use a custom element to explore Google Street View.
 
+## Demonstration
+
+https://user-images.githubusercontent.com/115455389/216305289-3527deb3-0f04-49c1-b84f-e68f04b57755.mp4
 
 
 ## Requirements
