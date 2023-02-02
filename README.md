@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Custom Element Selection** is a feature in askui that enables you to create custom selectors for elements on the screen, instead of relying on the standard selectors provided such as *Button, Icon, etc.*
+**Custom Element Selection** is a feature in askui that enables you to create custom selectors for elements on the screen, instead of relying on the standard selectors provided such as *Button, Textfield, etc.*
 
 With this feature, you can define a custom selector based on how the element is displayed on the screen. This can be particularly useful in situations where standard selectors are unreliable due to the non-standard property of the element. It provides greater flexibility and control, allowing you to tailor the automation to meet the specific needs of your application.
 
@@ -169,8 +169,7 @@ describe('Explore the world in google maps', ()=>{
 
 ### 1) Open the Web Browser and Go To the Desired Website
 
-**Adjust the amount of time to wait**
-- The notable part of this procedure is the `waitFor()` after each execution. We have used it in three different lines of this code block. Check out the respective parts and adjust the amount of time to wait until the process is finished, it may take more or less time depending on the condition of your device and internet connection:
+- One notable part of this procedure is the `waitFor()` after each execution. We have used it in three different lines of this code block. Check out the respective parts and adjust the amount of time to wait until the process is finished. It may take more or less time depending on the condition of your device and internet connection:
 ```ts
 it('open web browser and go to  google maps', async ()=>{
     // open the start menu/spotlight to search for the web browser
@@ -232,7 +231,7 @@ it('enable street view', async ()=>{
     await aui.mouseToggleDown().exec();
 
     // drag the custom element(our human) to the location we want to explore
-    // note the offset of 50 pixels in the y axis
+    // note the offset of -10 pixels in the y axis
     // we drag the human to 10 pixels higher than the location Aguas Calientes
     await aui.moveMouseRelativelyTo(0,-10).text().withText('Aguas Calientes').exec();
 
@@ -246,13 +245,13 @@ it('enable street view', async ()=>{
     - `0.0` will consider every element on the screen as matched with the given image.
     - `1.0` will examine the given elements as strict as possible, so you might end up without any matching element found.
 - So, the best scenario to set the `threshold` might be:
-    - 1) Make the custom image to be as precise as possible.
+    - 1) Make the custom image to be as precise as possible (cropping from the screen).
     - 2) Keep the `threshold` relatively higher, but below `1.0`
 
 
 ## Conclusion
 
-To construct a robust and reliable test suite, you might want to consider using the custom element feature of askui. But as mentioned above, keep in mind that, as a trade-off, it consumes more time than other features. Taking it into account, using a custom element to interact with the given UI can be a huge help, especially if the element lacks standard properties such as tag or appearance. 
+If you plan to program an automation where you have elements with non-standard properties, you might want to consider using the custom element feature of askui. But as mentioned above, keep in mind that, as a trade-off, it consumes more time than other features. Taking it into account, using a custom element to interact with the given UI can be a huge help, especially if the element lacks standard properties such as tag or appearance. 
 
 
 If you got any issues while following this article, don't hesitate to ask for help in our [Discord Community!](https://discord.gg/Gu35zMGxbx) We are more than glad to hear about your experience and help!
