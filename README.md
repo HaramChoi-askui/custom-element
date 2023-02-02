@@ -232,3 +232,8 @@ it('enable street view', async ()=>{
 
 ## Conclusion
 
+To construct a robust and reliable test suite, you might want to consider using the custom element feature of askui. But as mentioned above, keep in mind that, as a trade-off, it consumes more time for the test run. Taking it into account, using a custom element to interact with the given UI can be a huge help, especially if the element lacks standard properties such as tag or appearance. 
+
+
+If you got any issues while following this article, don't hesitate to ask for help in our [Discord Community!](https://discord.gg/Gu35zMGxbx) We are more than glad to hear about your test case and help!
+
