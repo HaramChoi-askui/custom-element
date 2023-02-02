@@ -144,13 +144,13 @@ describe('Explore the world in google maps', ()=>{
 
 - After successfully running the code, you will be able to see the landscape of **Machu Picchu**, the most iconic citadel of the lost empire Inca.
 
-- It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen.(you display can have a different resolution than mine) You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`.
+- It is possible that you end up with a plain **Google Map** without having the **Street View** enabled. It might be caused by various reasons, but the most likely scenario is due to the different resolutions of the screen(your display can have a different resolution than mine). You could try to **adjust the amount of the pixel offset** that is given to the `moveMouseRelativelyTo()`.
 
 ## Breaking Down the Test Code
 
 ### 1) Open the Web Browser and Go To the Desired Website
 
-**Adjust the amount of the time to wait**
+**Adjust the amount of time to wait**
 - The notable part of this procedure is the `waitFor(#)` after each execution. We have used it in three different lines of the code. Check out the respective parts and adjust the amount of time to wait until the process is finished, it may take more or less time depending on the condition of your device and internet connection:
 ```ts
 it('open web browser and go to  google maps', async ()=>{
