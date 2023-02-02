@@ -151,7 +151,7 @@ describe('Explore the world in google maps', ()=>{
 ### 1) Open the Web Browser and Go To the Desired Website
 
 **Adjust the amount of time to wait**
-- The notable part of this procedure is the `waitFor(#)` after each execution. We have used it in three different lines of the code. Check out the respective parts and adjust the amount of time to wait until the process is finished, it may take more or less time depending on the condition of your device and internet connection:
+- The notable part of this procedure is the `waitFor()` after each execution. We have used it in three different lines of this code block. Check out the respective parts and adjust the amount of time to wait until the process is finished, it may take more or less time depending on the condition of your device and internet connection:
 ```ts
 it('open web browser and go to  google maps', async ()=>{
     // open the start menu/spotlight to search for the web browser
@@ -169,11 +169,11 @@ it('open web browser and go to  google maps', async ()=>{
 });
 ```
 
-- Also, don't forget to change the key to press and the name of the web browser.
+- Also, don't forget to change the key to press and the name of the web browser based on your condition.
 
 ### 2) Search for the Location
 
-- Here we type our desired keyword to the textfield of Google Maps. As the textfield gets focused automatically, we can directly type in the keyword to the textfield:
+- Here we type our desired keyword into the textfield of Google Maps. As the textfield gets focused automatically, we can directly type in the keyword to the textfield:
 
 ```ts
 it('search for a location', async ()=>{
@@ -193,6 +193,7 @@ it('search for a location', async ()=>{
 - Finally, we drag our human, which we defined as our **Custom Element**, to the desired location.
 - Firstly, we move the mouse cursor to our custom element.
 - For dragging the mouse, we use the `mouseToggleDown()` to **press-and-hold** the mouse left button.
+- After that, we move the mouse to the desired location.
 - Thereafter, we use `mouseToggleUp()` to **release** the mouse button.
 
 ```ts
